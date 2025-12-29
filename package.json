@@ -4,7 +4,7 @@
   "description": "Full stack Hello World app with React and Node.js",
   "scripts": {
     "start": "cd frontend && npm start",
-    "build": "cd frontend && npm run build",
+    "build": "npm run generate-index && cd frontend && npm run build",
     "install": "cd frontend && npm install",
     "generate-index": "node scripts/generate-blog-index.js"
   },

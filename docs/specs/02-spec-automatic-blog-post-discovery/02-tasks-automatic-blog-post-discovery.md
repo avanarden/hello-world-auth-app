@@ -45,7 +45,7 @@
 - [x] 1.11 Add `generate-index` script to root `package.json` scripts section: `"generate-index": "node scripts/generate-blog-index.js"`
 - [x] 1.12 Test script execution by running `npm run generate-index` and verifying output
 
-### [ ] 2.0 Integrate Index Generation into Build Process
+### [x] 2.0 Integrate Index Generation into Build Process
 
 **Purpose:** Integrate the index generation script into the npm build process so that `blog-index.json` is automatically regenerated before production builds.
 
@@ -58,11 +58,11 @@
 
 #### 2.0 Tasks
 
-- [ ] 2.1 Update root `package.json` build script to run `generate-index` before frontend build: `"build": "npm run generate-index && cd frontend && npm run build"`
-- [ ] 2.2 Test build integration by running `npm run build` from project root and verifying index is generated first
-- [ ] 2.3 Verify that `frontend/build/blog-index.json` exists after build completes
-- [ ] 2.4 Verify that build process fails gracefully if index generation encounters errors
-- [ ] 2.5 Test that newly generated index is correctly included in the React build output
+- [x] 2.1 Update root `package.json` build script to run `generate-index` before frontend build: `"build": "npm run generate-index && cd frontend && npm run build"`
+- [x] 2.2 Test build integration by running `npm run build` from project root and verifying index is generated first
+- [x] 2.3 Verify that `frontend/build/blog-index.json` exists after build completes
+- [x] 2.4 Verify that build process fails gracefully if index generation encounters errors
+- [x] 2.5 Test that newly generated index is correctly included in the React build output
 
 ### [ ] 3.0 Update Documentation and Verify Backward Compatibility
 
