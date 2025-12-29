@@ -31,7 +31,7 @@
 - [x] T1.3 Update `frontend/package.json` name field from `"hello-world-frontend"` to `"blog-frontend"`
 - [x] T1.4 Run `npm install` to verify no dependency issues after renaming
 
-### [ ] T2.0 Verify Build and Runtime Functionality
+### [~] T2.0 Verify Build and Runtime Functionality
 
 #### T2.0 Proof Artifact(s)
 
@@ -42,12 +42,12 @@
 
 #### T2.0 Tasks
 
-- [ ] T2.1 Run `npm install` to ensure dependency resolution works correctly
-- [ ] T2.2 Run `npm run build` to verify production build completes successfully
-- [ ] T2.3 Run `npm start` to launch the development server
-- [ ] T2.4 Navigate to http://localhost:3000/blog in browser and verify the application loads
-- [ ] T2.5 Open browser developer console and verify no errors are present
-- [ ] T2.6 Take screenshot of browser console showing no errors and save as proof artifact
+- [x] T2.1 Run `npm install` to ensure dependency resolution works correctly
+- [x] T2.2 Run `npm run build` to verify production build completes successfully
+- [x] T2.3 Run `npm start` to launch the development server
+- [x] T2.4 Navigate to http://localhost:3000/blog in browser and verify the application loads
+- [x] T2.5 Open browser developer console and verify no errors are present
+- [x] T2.6 Take screenshot of browser console showing no errors and save as proof artifact
 
 ### [ ] T3.0 Create GitHub Repository Renaming Documentation
 

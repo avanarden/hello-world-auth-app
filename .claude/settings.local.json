@@ -16,7 +16,8 @@
       "Bash(npm run generate-index:*)",
       "Bash(git commit:*)",
       "Bash(cat:*)",
-      "Skill(SDD-3-manage-tasks)"
+      "Skill(SDD-3-manage-tasks)",
+      "Bash(npm start)"
     ],
     "deny": [],
     "ask": []
