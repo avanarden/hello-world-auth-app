@@ -8,7 +8,9 @@
       "Bash(mkdir:*)",
       "Bash(npm run build:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"feat: implement blog list page with content fetching\" -m \"- Created blog-index.json with sample blog entries\" -m \"- Implemented blogUtils.js with formatting functions\" -m \"- Created BlogList component with data fetching and state management\" -m \"- Integrated BlogList into home route\" -m \"- Added comprehensive CSS styling for blog list\" -m \"- Posts display sorted by date \\(newest first\\)\" -m \"- Includes loading and error states\" -m \"Related to T2.0 in Spec 01\")"
+      "Bash(git commit -m \"feat: implement blog list page with content fetching\" -m \"- Created blog-index.json with sample blog entries\" -m \"- Implemented blogUtils.js with formatting functions\" -m \"- Created BlogList component with data fetching and state management\" -m \"- Integrated BlogList into home route\" -m \"- Added comprehensive CSS styling for blog list\" -m \"- Posts display sorted by date \\(newest first\\)\" -m \"- Includes loading and error states\" -m \"Related to T2.0 in Spec 01\")",
+      "Bash(git commit -m \"feat: implement markdown rendering and blog post fetching\" -m \"- Installed react-markdown, remark-gfm, react-syntax-highlighter\" -m \"- Created 3 sample blog posts with diverse GFM features\" -m \"- Implemented BlogPost component with markdown rendering\" -m \"- Added syntax highlighting for code blocks\" -m \"- Integrated BlogPost into routing\" -m \"- Added comprehensive CSS styling for blog posts\" -m \"- Supports tables, task lists, code blocks, blockquotes\" -m \"- Includes loading and error states\" -m \"Related to T3.0 in Spec 01\")",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []

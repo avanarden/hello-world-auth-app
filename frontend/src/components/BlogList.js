@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { formatDate, sortByDateDesc } from '../utils/blogUtils';
 
 function BlogList() {
@@ -12,7 +13,10 @@ function BlogList() {
     fetch('/blog-index.json')
       .then(response => {
         if (!response.ok) {
-          throw new Error('Failed to load blog posts');
+          if (response.status === 404) {
+            throw new Error('Blog index not found. Please contact the site administrator.');
+          }
+          throw new Error('Unable to load blog posts. Please check your connection and try again.');
         }
         return response.json();
       })
@@ -55,6 +59,11 @@ function BlogList() {
 
   return (
     <div className="blog-list">
+      <Helmet>
+        <title>Alan's Blog - Home</title>
+        <meta name="description" content="Welcome to Alan's Blog. Read articles on software development, technology, and more." />
+      </Helmet>
+
       <h2>Blog Posts</h2>
       <ul className="blog-list-items">
         {posts.map(post => (

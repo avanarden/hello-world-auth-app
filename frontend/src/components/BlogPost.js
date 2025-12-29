@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -16,18 +17,26 @@ function BlogPost() {
   useEffect(() => {
     // Fetch blog index to get post info
     fetch('/blog-index.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Unable to load blog index. Please check your connection and try again.');
+        }
+        return response.json();
+      })
       .then(posts => {
         const post = posts.find(p => p.slug === slug);
         if (!post) {
-          throw new Error('Blog post not found');
+          throw new Error('This blog post doesn\'t exist. It may have been removed or the URL is incorrect.');
         }
         setPostInfo(post);
         return fetch(post.path);
       })
       .then(response => {
         if (!response.ok) {
-          throw new Error('Failed to load blog post content');
+          if (response.status === 404) {
+            throw new Error('The blog post file could not be found. Please contact the site administrator.');
+          }
+          throw new Error('Failed to load blog post content. Please try again later.');
         }
         return response.text();
       })
@@ -60,10 +69,18 @@ function BlogPost() {
     );
   }
 
+  const pageTitle = postInfo?.title || formatBlogTitle(slug);
+  const description = `Read ${pageTitle} on Alan's Blog`;
+
   return (
     <article className="blog-post">
+      <Helmet>
+        <title>{pageTitle} - Alan's Blog</title>
+        <meta name="description" content={description} />
+      </Helmet>
+
       <div className="blog-post-header">
-        <h1 className="blog-post-title">{postInfo?.title || formatBlogTitle(slug)}</h1>
+        <h1 className="blog-post-title">{pageTitle}</h1>
         {postInfo?.date && (
           <time className="blog-post-date">{formatDate(postInfo.date)}</time>
         )}

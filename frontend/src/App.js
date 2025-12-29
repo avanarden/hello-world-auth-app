@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BlogList from './components/BlogList';
 import BlogPost from './components/BlogPost';
+import NotFound from './components/NotFound';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<BlogList />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </div>
