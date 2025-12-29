@@ -16,7 +16,7 @@
 
 ## Tasks
 
-### [~] T1.0 Update Package Configurations
+### [x] T1.0 Update Package Configurations
 
 #### T1.0 Proof Artifact(s)
 
