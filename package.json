@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "description": "Full stack Hello World app with React and Node.js",
   "scripts": {
-    "install-all": "cd backend && npm install && cd ../frontend && npm install",
-    "start-backend": "cd backend && npm start",
-    "start-frontend": "cd frontend && npm start",
-    "dev-backend": "cd backend && npm run dev",
-    "dev": "concurrently \"npm run dev-backend\" \"npm run start-frontend\"",
-    "build": "cd frontend && npm run build"
+    "start": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "install": "cd frontend && npm install"
   },
   "devDependencies": {
     "concurrently": "8.2.2"
