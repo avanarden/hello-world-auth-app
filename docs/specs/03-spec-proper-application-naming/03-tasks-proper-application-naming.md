@@ -49,7 +49,7 @@
 - [x] T2.5 Open browser developer console and verify no errors are present
 - [x] T2.6 Take screenshot of browser console showing no errors and save as proof artifact
 
-### [~] T3.0 Create GitHub Repository Renaming Documentation
+### [x] T3.0 Create GitHub Repository Renaming Documentation
 
 #### T3.0 Proof Artifact(s)
 
