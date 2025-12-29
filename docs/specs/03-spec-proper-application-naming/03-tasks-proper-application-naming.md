@@ -49,7 +49,7 @@
 - [x] T2.5 Open browser developer console and verify no errors are present
 - [x] T2.6 Take screenshot of browser console showing no errors and save as proof artifact
 
-### [ ] T3.0 Create GitHub Repository Renaming Documentation
+### [~] T3.0 Create GitHub Repository Renaming Documentation
 
 #### T3.0 Proof Artifact(s)
 
@@ -58,8 +58,8 @@
 
 #### T3.0 Tasks
 
-- [ ] T3.1 Create documentation file at `docs/specs/03-spec-proper-application-naming/github-repository-rename.md`
-- [ ] T3.2 Document GitHub UI steps for renaming repository from `"hello-world-auth-app"` to `"blog-app"`
-- [ ] T3.3 Document implications of repository renaming including URL changes and automatic redirects
-- [ ] T3.4 Document commands for updating local git remote URLs after GitHub rename
-- [ ] T3.5 Include verification steps to confirm the repository rename is complete
+- [x] T3.1 Create documentation file at `docs/specs/03-spec-proper-application-naming/github-repository-rename.md`
+- [x] T3.2 Document GitHub UI steps for renaming repository from `"hello-world-auth-app"` to `"blog-app"`
+- [x] T3.3 Document implications of repository renaming including URL changes and automatic redirects
+- [x] T3.4 Document commands for updating local git remote URLs after GitHub rename
+- [x] T3.5 Include verification steps to confirm the repository rename is complete
