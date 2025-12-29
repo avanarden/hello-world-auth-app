@@ -56,7 +56,8 @@ The blog will be available at `http://localhost:3000`.
 From the root directory:
 
 - `npm start` - Start the development server
-- `npm run build` - Build the production bundle
+- `npm run build` - Build the production bundle (automatically generates blog index)
+- `npm run generate-index` - Generate blog index from markdown files
 - `npm install` - Install dependencies
 
 From the `frontend/` directory:
@@ -67,16 +68,34 @@ From the `frontend/` directory:
 
 ## Adding New Blog Posts
 
+The blog uses an automated index generation system that discovers blog posts from markdown files.
+
 ### Step 1: Create the Markdown File
 
 Create a new markdown file in the appropriate year directory under `frontend/public/`:
 
 ```bash
 # Example for a post on March 15, 2025
+# Create the year directory if it doesn't exist
+mkdir -p frontend/public/2025
+
+# Create your blog post file
 touch frontend/public/2025/blog-2025-03-15-my-new-post.md
 ```
 
-**File naming convention**: `YYYY/blog-YYYY-MM-DD-title-slug.md`
+**IMPORTANT - File Naming Convention**: `blog-YYYY-MM-DD-title-slug.md`
+
+- **Year directory**: Files must be in a `YYYY/` directory (e.g., `2025/`)
+- **Filename format**: Must start with `blog-` followed by date `YYYY-MM-DD-` and a title slug
+- **Year consistency**: The year in the directory must match the year in the filename
+- **Title slug**: Use lowercase with hyphens (e.g., `my-new-post`)
+
+**Examples:**
+- ✅ `2025/blog-2025-03-15-my-new-post.md` (correct)
+- ✅ `2024/blog-2024-12-01-another-post.md` (correct)
+- ❌ `2025/blog-2024-03-15-my-post.md` (year mismatch)
+- ❌ `2025/2025-03-15-my-post.md` (missing `blog-` prefix)
+- ❌ `blog-2025-03-15-my-post.md` (missing year directory)
 
 ### Step 2: Write Your Content
 
@@ -117,20 +136,29 @@ function hello() {
 - [ ] Pending task
 ```
 
-### Step 3: Update the Blog Index
+### Step 3: Generate the Blog Index
 
-Edit `frontend/public/blog-index.json` and add an entry for your new post:
+The blog index is generated automatically, but you have two options:
 
-```json
-{
-  "slug": "2025-03-15-my-new-post",
-  "title": "My New Post",
-  "date": "2025-03-15",
-  "path": "/2025/blog-2025-03-15-my-new-post.md"
-}
+**Option A: Quick Development Testing**
+
+Generate the index without doing a full build:
+
+```bash
+npm run generate-index
 ```
 
-Add the new entry to the beginning of the array to show it first in the list.
+This scans all year directories, discovers blog posts, and updates `frontend/public/blog-index.json`. Use this when you want to quickly test your new post locally.
+
+**Option B: Production Build** (Recommended)
+
+The index is automatically generated when you build:
+
+```bash
+npm run build
+```
+
+This runs the index generation automatically before building the React app, ensuring your production deployment always has an up-to-date index.
 
 ### Step 4: Test Locally
 
@@ -142,6 +170,7 @@ Navigate to `http://localhost:3000` and verify:
 - Your new post appears in the blog list
 - Clicking the post loads and renders the markdown correctly
 - All formatting, code blocks, and links work as expected
+- Posts are sorted by date (newest first)
 
 ### Step 5: Deploy
 
