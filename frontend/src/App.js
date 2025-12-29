@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import BlogList from './components/BlogList';
 import './App.css';
 
 function App() {
@@ -11,20 +12,12 @@ function App() {
         </header>
         <main className="app-main">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<BlogList />} />
             <Route path="/blog/:slug" element={<BlogPostPlaceholder />} />
           </Routes>
         </main>
       </div>
     </Router>
-  );
-}
-
-function HomePage() {
-  return (
-    <div className="empty-state">
-      <p>No blog posts yet</p>
-    </div>
   );
 }
 

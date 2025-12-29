@@ -31,7 +31,7 @@
 
 ## Tasks
 
-### [~] 1.0 Remove Authentication Code and Establish Routing Foundation
+### [x] 1.0 Remove Authentication Code and Establish Routing Foundation
 
 #### 1.0 Proof Artifact(s)
 
@@ -52,7 +52,7 @@
 - [x] 1.9 Add "Alan's Blog" header and empty state message ("No blog posts yet") to the home route
 - [x] 1.10 Test by running `npm start` from frontend directory and verify no errors, header displays correctly
 
-### [ ] 2.0 Implement Blog List Page with Content Fetching from Blog Index
+### [~] 2.0 Implement Blog List Page with Content Fetching from Blog Index
 
 #### 2.0 Proof Artifact(s)
 
@@ -63,16 +63,16 @@
 
 #### 2.0 Tasks
 
-- [ ] 2.1 Create `frontend/public/blog-index.json` with array of blog entries containing: `slug`, `title`, `date`, `path` fields for 3 sample posts
-- [ ] 2.2 Create `frontend/src/utils/` directory
-- [ ] 2.3 Create `frontend/src/utils/blogUtils.js` with utility functions: `formatBlogTitle(slug)` to convert "my-first-post" to "My First Post", `formatDate(dateString)` to format dates nicely, `sortByDateDesc(posts)` to sort posts by date
-- [ ] 2.4 Create `frontend/src/components/` directory
-- [ ] 2.5 Create `frontend/src/components/BlogList.js` component that fetches `/blog-index.json`, displays posts sorted by date (newest first), shows title and formatted date for each post, handles loading state, handles errors gracefully
-- [ ] 2.6 Each blog entry in BlogList should be a clickable link using React Router's `Link` component, navigating to `/blog/:slug`
-- [ ] 2.7 Update `frontend/src/App.js` to import and render BlogList component on the home route
-- [ ] 2.8 Add CSS styling to `frontend/src/App.css` for blog list layout (clean, minimal design with proper spacing)
-- [ ] 2.9 Test by running `npm start` and verifying blog list displays, posts are sorted correctly, clicking navigates to correct route
-- [ ] 2.10 Verify browser console shows no errors and network request for blog-index.json succeeds
+- [x] 2.1 Create `frontend/public/blog-index.json` with array of blog entries containing: `slug`, `title`, `date`, `path` fields for 3 sample posts
+- [x] 2.2 Create `frontend/src/utils/` directory
+- [x] 2.3 Create `frontend/src/utils/blogUtils.js` with utility functions: `formatBlogTitle(slug)` to convert "my-first-post" to "My First Post", `formatDate(dateString)` to format dates nicely, `sortByDateDesc(posts)` to sort posts by date
+- [x] 2.4 Create `frontend/src/components/` directory
+- [x] 2.5 Create `frontend/src/components/BlogList.js` component that fetches `/blog-index.json`, displays posts sorted by date (newest first), shows title and formatted date for each post, handles loading state, handles errors gracefully
+- [x] 2.6 Each blog entry in BlogList should be a clickable link using React Router's `Link` component, navigating to `/blog/:slug`
+- [x] 2.7 Update `frontend/src/App.js` to import and render BlogList component on the home route
+- [x] 2.8 Add CSS styling to `frontend/src/App.css` for blog list layout (clean, minimal design with proper spacing)
+- [x] 2.9 Test by running `npm start` and verifying blog list displays, posts are sorted correctly, clicking navigates to correct route
+- [x] 2.10 Verify browser console shows no errors and network request for blog-index.json succeeds
 
 ### [ ] 3.0 Implement Markdown Rendering and Blog Post Fetching
 
