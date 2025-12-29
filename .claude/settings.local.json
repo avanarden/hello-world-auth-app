@@ -17,7 +17,11 @@
       "Bash(git commit:*)",
       "Bash(cat:*)",
       "Skill(SDD-3-manage-tasks)",
-      "Bash(npm start)"
+      "Bash(npm start)",
+      "Skill(SDD-4-validate-spec-implementation)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []
