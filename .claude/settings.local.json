@@ -7,7 +7,8 @@
       "Bash(find:*)",
       "Bash(mkdir:*)",
       "Bash(npm run build:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"feat: implement blog list page with content fetching\" -m \"- Created blog-index.json with sample blog entries\" -m \"- Implemented blogUtils.js with formatting functions\" -m \"- Created BlogList component with data fetching and state management\" -m \"- Integrated BlogList into home route\" -m \"- Added comprehensive CSS styling for blog list\" -m \"- Posts display sorted by date \\(newest first\\)\" -m \"- Includes loading and error states\" -m \"Related to T2.0 in Spec 01\")"
     ],
     "deny": [],
     "ask": []

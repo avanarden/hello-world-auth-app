@@ -52,7 +52,7 @@
 - [x] 1.9 Add "Alan's Blog" header and empty state message ("No blog posts yet") to the home route
 - [x] 1.10 Test by running `npm start` from frontend directory and verify no errors, header displays correctly
 
-### [~] 2.0 Implement Blog List Page with Content Fetching from Blog Index
+### [x] 2.0 Implement Blog List Page with Content Fetching from Blog Index
 
 #### 2.0 Proof Artifact(s)
 
@@ -74,7 +74,7 @@
 - [x] 2.9 Test by running `npm start` and verifying blog list displays, posts are sorted correctly, clicking navigates to correct route
 - [x] 2.10 Verify browser console shows no errors and network request for blog-index.json succeeds
 
-### [ ] 3.0 Implement Markdown Rendering and Blog Post Fetching
+### [~] 3.0 Implement Markdown Rendering and Blog Post Fetching
 
 #### 3.0 Proof Artifact(s)
 
@@ -86,17 +86,17 @@
 
 #### 3.0 Tasks
 
-- [ ] 3.1 Install markdown rendering dependencies: `npm install react-markdown@9.0.1 remark-gfm@4.0.0 react-syntax-highlighter@15.5.0` in frontend directory
-- [ ] 3.2 Create `frontend/public/2024/` directory for blog post files
-- [ ] 3.3 Create `frontend/public/2024/blog-2024-01-15-sample-post.md` with sample content including: headings, paragraphs, bold/italic text, links, lists, code blocks with JavaScript/Python examples, tables, task lists
-- [ ] 3.4 Create `frontend/public/2024/blog-2024-03-20-another-post.md` with different sample content to demonstrate variety
-- [ ] 3.5 Create `frontend/public/2024/blog-2024-06-10-third-post.md` with additional sample content
-- [ ] 3.6 Update `frontend/public/blog-index.json` to reference the correct paths for these three posts (e.g., `/2024/blog-2024-01-15-sample-post.md`)
-- [ ] 3.7 Create `frontend/src/components/BlogPost.js` component that: uses `useParams()` to get slug from URL, fetches markdown file from the path, displays loading state, renders markdown using react-markdown with remark-gfm plugin, includes syntax highlighting for code blocks using react-syntax-highlighter, shows blog title and date at top, includes "Back to Blog List" link, handles errors (404 for missing posts)
-- [ ] 3.8 Update `frontend/src/App.js` to add Route for `/blog/:slug` that renders BlogPost component
-- [ ] 3.9 Add CSS styling to `frontend/src/App.css` for blog post layout: max-width 700-800px for readability, proper typography for headings, spacing for paragraphs, styling for code blocks, table styling, task list styling
-- [ ] 3.10 Test by navigating to `/blog/2024-01-15-sample-post` and verifying: markdown renders correctly, code highlighting works, tables and task lists display properly, back navigation works
-- [ ] 3.11 Test error handling by navigating to invalid blog URL and verifying error message displays
+- [x] 3.1 Install markdown rendering dependencies: `npm install react-markdown@9.0.1 remark-gfm@4.0.0 react-syntax-highlighter@15.5.0` in frontend directory
+- [x] 3.2 Create `frontend/public/2024/` directory for blog post files
+- [x] 3.3 Create `frontend/public/2024/blog-2024-01-15-sample-post.md` with sample content including: headings, paragraphs, bold/italic text, links, lists, code blocks with JavaScript/Python examples, tables, task lists
+- [x] 3.4 Create `frontend/public/2024/blog-2024-03-20-another-post.md` with different sample content to demonstrate variety
+- [x] 3.5 Create `frontend/public/2024/blog-2024-06-10-third-post.md` with additional sample content
+- [x] 3.6 Update `frontend/public/blog-index.json` to reference the correct paths for these three posts (e.g., `/2024/blog-2024-01-15-sample-post.md`)
+- [x] 3.7 Create `frontend/src/components/BlogPost.js` component that: uses `useParams()` to get slug from URL, fetches markdown file from the path, displays loading state, renders markdown using react-markdown with remark-gfm plugin, includes syntax highlighting for code blocks using react-syntax-highlighter, shows blog title and date at top, includes "Back to Blog List" link, handles errors (404 for missing posts)
+- [x] 3.8 Update `frontend/src/App.js` to add Route for `/blog/:slug` that renders BlogPost component
+- [x] 3.9 Add CSS styling to `frontend/src/App.css` for blog post layout: max-width 700-800px for readability, proper typography for headings, spacing for paragraphs, styling for code blocks, table styling, task list styling
+- [x] 3.10 Test by navigating to `/blog/2024-01-15-sample-post` and verifying: markdown renders correctly, code highlighting works, tables and task lists display properly, back navigation works
+- [x] 3.11 Test error handling by navigating to invalid blog URL and verifying error message displays
 
 ### [ ] 4.0 Add SEO, Error Handling, and Deployment Preparation
 

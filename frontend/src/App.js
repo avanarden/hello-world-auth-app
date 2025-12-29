@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BlogList from './components/BlogList';
+import BlogPost from './components/BlogPost';
 import './App.css';
 
 function App() {
@@ -13,19 +14,11 @@ function App() {
         <main className="app-main">
           <Routes>
             <Route path="/" element={<BlogList />} />
-            <Route path="/blog/:slug" element={<BlogPostPlaceholder />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
           </Routes>
         </main>
       </div>
     </Router>
-  );
-}
-
-function BlogPostPlaceholder() {
-  return (
-    <div>
-      <p>Blog post content will appear here</p>
-    </div>
   );
 }
 
