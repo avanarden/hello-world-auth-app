@@ -15,7 +15,8 @@
       "Skill(SDD-2-generate-task-list-from-spec)",
       "Bash(npm run generate-index:*)",
       "Bash(git commit:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Skill(SDD-3-manage-tasks)"
     ],
     "deny": [],
     "ask": []

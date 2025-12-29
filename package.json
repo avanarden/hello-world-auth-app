@@ -1,7 +1,7 @@
 {
-  "name": "hello-world-app",
+  "name": "blog-app",
   "version": "1.0.0",
-  "description": "Full stack Hello World app with React and Node.js",
+  "description": "A static blog site built with React",
   "scripts": {
     "start": "cd frontend && npm start",
     "build": "npm run generate-index && cd frontend && npm run build",
