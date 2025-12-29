@@ -5,7 +5,8 @@
   "scripts": {
     "start": "cd frontend && npm start",
     "build": "cd frontend && npm run build",
-    "install": "cd frontend && npm install"
+    "install": "cd frontend && npm install",
+    "generate-index": "node scripts/generate-blog-index.js"
   },
   "devDependencies": {
     "concurrently": "8.2.2"
