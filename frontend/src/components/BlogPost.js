@@ -16,7 +16,7 @@ function BlogPost() {
 
   useEffect(() => {
     // Fetch blog index to get post info
-    fetch('/blog-index.json')
+    fetch(`${process.env.PUBLIC_URL}/blog-index.json`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Unable to load blog index. Please check your connection and try again.');
@@ -29,7 +29,7 @@ function BlogPost() {
           throw new Error('This blog post doesn\'t exist. It may have been removed or the URL is incorrect.');
         }
         setPostInfo(post);
-        return fetch(post.path);
+        return fetch(`${process.env.PUBLIC_URL}${post.path}`);
       })
       .then(response => {
         if (!response.ok) {

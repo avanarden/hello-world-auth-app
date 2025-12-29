@@ -10,7 +10,7 @@ function BlogList() {
 
   useEffect(() => {
     // Fetch blog index
-    fetch('/blog-index.json')
+    fetch(`${process.env.PUBLIC_URL}/blog-index.json`)
       .then(response => {
         if (!response.ok) {
           if (response.status === 404) {
