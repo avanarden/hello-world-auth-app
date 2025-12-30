@@ -263,12 +263,12 @@ a:focus-visible,
 }
 
 .blog-post-content code {
-  background-color: #f8f8f8;
+  background-color: #f7f7f7;
   padding: 0.2rem 0.4rem;
   border-radius: 3px;
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Roboto Mono', 'Courier New', monospace;
   font-size: 0.9em;
-  color: #d63384;
+  color: #222;
 }
 
 .blog-post-content pre {
@@ -315,13 +315,13 @@ a:focus-visible,
 }
 
 .blog-post-content thead {
-  background-color: #f8f8f8;
+  background-color: #f7f7f7;
 }
 
 .blog-post-content th,
 .blog-post-content td {
   padding: 0.75rem 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   text-align: left;
 }
 
@@ -331,17 +331,17 @@ a:focus-visible,
 }
 
 .blog-post-content tr:nth-child(even) {
-  background-color: #f8f8f8;
+  background-color: #f7f7f7;
 }
 
 /* Blockquotes */
 .blog-post-content blockquote {
-  border-left: 4px solid #4a90e2;
+  border-left: 4px solid #746c48;
   padding-left: 1.5rem;
   margin: 1.5rem 0;
   color: #666;
   font-style: italic;
-  background-color: #f8f8f8;
+  background-color: #f7f7f7;
   padding: 1rem 1.5rem;
   border-radius: 3px;
 }
@@ -353,7 +353,7 @@ a:focus-visible,
 /* Horizontal Rule */
 .blog-post-content hr {
   border: none;
-  border-top: 2px solid #e0e0e0;
+  border-top: 2px solid rgba(0, 0, 0, 0.06);
   margin: 2rem 0;
 }
 
