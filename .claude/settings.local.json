@@ -22,7 +22,17 @@
       "Bash(git log:*)",
       "Bash(git show:*)",
       "Bash(grep:*)",
-      "WebFetch(domain:vanarden.ca)"
+      "WebFetch(domain:vanarden.ca)",
+      "WebFetch(domain:localhost)",
+      "Bash(curl:*)",
+      "Bash(ps:*)",
+      "Bash(ls:*)",
+      "Bash(kill:*)",
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:using-git-worktrees)",
+      "Bash(git check-ignore:*)",
+      "Bash(git worktree add:*)",
+      "Skill(superpowers:writing-plans)"
     ],
     "deny": [],
     "ask": []
