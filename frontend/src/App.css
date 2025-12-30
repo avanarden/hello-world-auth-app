@@ -12,8 +12,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
-  color: #333;
-  background-color: #fafafa;
+  color: #2c2c2c;
+  background-color: #ffffff;
 }
 
 /* App Container */
@@ -25,11 +25,12 @@ body {
 
 /* Header Styles */
 .app-header {
-  background-color: #282c34;
-  color: white;
+  background-color: #ffffff;
+  color: #1a1a1a;
   padding: 2rem;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .app-header h1 {
@@ -74,7 +75,7 @@ body {
 .blog-list h2 {
   font-size: 1.8rem;
   margin-bottom: 2rem;
-  color: #282c34;
+  color: #1a1a1a;
   font-weight: 600;
 }
 
@@ -113,7 +114,7 @@ body {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
-  color: #282c34;
+  color: #1a1a1a;
   transition: color 0.2s ease;
 }
 
@@ -166,7 +167,7 @@ body {
   font-size: 2.5rem;
   font-weight: 700;
   margin: 0 0 0.5rem 0;
-  color: #282c34;
+  color: #1a1a1a;
   line-height: 1.2;
 }
 
@@ -205,7 +206,7 @@ body {
 .blog-post-content h6 {
   margin: 2rem 0 1rem 0;
   font-weight: 600;
-  color: #282c34;
+  color: #1a1a1a;
   line-height: 1.3;
 }
 
@@ -254,10 +255,10 @@ body {
 }
 
 .blog-post-content code {
-  background-color: #f5f5f5;
+  background-color: #f8f8f8;
   padding: 0.2rem 0.4rem;
   border-radius: 3px;
-  font-family: 'Courier New', monospace;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Roboto Mono', 'Courier New', monospace;
   font-size: 0.9em;
   color: #d63384;
 }
@@ -306,7 +307,7 @@ body {
 }
 
 .blog-post-content thead {
-  background-color: #f5f5f5;
+  background-color: #f8f8f8;
 }
 
 .blog-post-content th,
@@ -318,11 +319,11 @@ body {
 
 .blog-post-content th {
   font-weight: 600;
-  color: #282c34;
+  color: #1a1a1a;
 }
 
 .blog-post-content tr:nth-child(even) {
-  background-color: #fafafa;
+  background-color: #f8f8f8;
 }
 
 /* Blockquotes */
@@ -332,7 +333,7 @@ body {
   margin: 1.5rem 0;
   color: #666;
   font-style: italic;
-  background-color: #f9f9f9;
+  background-color: #f8f8f8;
   padding: 1rem 1.5rem;
   border-radius: 3px;
 }

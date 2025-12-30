@@ -21,7 +21,8 @@
       "Skill(SDD-4-validate-spec-implementation)",
       "Bash(git log:*)",
       "Bash(git show:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "WebFetch(domain:vanarden.ca)"
     ],
     "deny": [],
     "ask": []
