@@ -86,3 +86,58 @@ describe('formatTitle', () => {
     expect(formatTitle('react-and-node')).toBe('React And Node');
   });
 });
+
+describe('findYearDirectories', () => {
+  test('finds valid year directories', () => {
+    testTempDir = createTempDir();
+
+    // Create valid year directories
+    fs.mkdirSync(path.join(testTempDir, '2024'));
+    fs.mkdirSync(path.join(testTempDir, '2025'));
+
+    // Create invalid directories that should be ignored
+    fs.mkdirSync(path.join(testTempDir, 'invalid'));
+    fs.mkdirSync(path.join(testTempDir, '20'));
+    fs.mkdirSync(path.join(testTempDir, '12345'));
+
+    // Create a file (not directory) that should be ignored
+    fs.writeFileSync(path.join(testTempDir, '2023.txt'), 'test');
+
+    const result = findYearDirectories(testTempDir);
+
+    expect(result).toEqual(['2024', '2025']);
+  });
+
+  test('returns empty array when no year directories exist', () => {
+    testTempDir = createTempDir();
+
+    // Create only non-year directories
+    fs.mkdirSync(path.join(testTempDir, 'posts'));
+    fs.mkdirSync(path.join(testTempDir, 'drafts'));
+
+    const result = findYearDirectories(testTempDir);
+
+    expect(result).toEqual([]);
+  });
+
+  test('returns empty array when directory does not exist', () => {
+    const nonExistentDir = path.join(os.tmpdir(), 'does-not-exist-12345');
+
+    const result = findYearDirectories(nonExistentDir);
+
+    expect(result).toEqual([]);
+  });
+
+  test('returns sorted year directories', () => {
+    testTempDir = createTempDir();
+
+    // Create years in non-sorted order
+    fs.mkdirSync(path.join(testTempDir, '2025'));
+    fs.mkdirSync(path.join(testTempDir, '2023'));
+    fs.mkdirSync(path.join(testTempDir, '2024'));
+
+    const result = findYearDirectories(testTempDir);
+
+    expect(result).toEqual(['2023', '2024', '2025']);
+  });
+});
