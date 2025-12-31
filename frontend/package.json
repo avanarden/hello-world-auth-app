@@ -43,5 +43,17 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
     "@testing-library/user-event": "^14.6.1"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(react-markdown|react-syntax-highlighter|remark-.*|unified|bail|is-plain-obj|trough|vfile.*|unist-.*|mdast-.*|micromark.*|decode-named-character-reference|character-entities.*|property-information|hast-.*|space-separated-tokens|comma-separated-tokens|pretty-bytes|ccount|escape-string-regexp|markdown-table|devlop|trim-lines|zwitch|web-namespaces|longest-streak|stringify-entities|estree-.*|html-.*|svg-.*|aria-.*)/)"
+    ],
+    "moduleNameMapper": {
+      "^unist-util-visit-parents/do-not-use-color$": "<rootDir>/node_modules/unist-util-visit-parents/lib/color.js",
+      "^vfile/do-not-use-color$": "<rootDir>/node_modules/vfile/lib/minurl.browser.js",
+      "^#minpath$": "<rootDir>/node_modules/vfile/lib/minpath.browser.js",
+      "^#minproc$": "<rootDir>/node_modules/vfile/lib/minproc.browser.js",
+      "^#minurl$": "<rootDir>/node_modules/vfile/lib/minurl.browser.js"
+    }
   }
 }
