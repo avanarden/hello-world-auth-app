@@ -149,4 +149,43 @@ describe('BlogPost', () => {
       expect(screen.getByText(/could not be found/)).toBeInTheDocument();
     });
   });
+
+  test('renders back links to blog list', async () => {
+    useParams.mockReturnValue({ slug: '2024-01-15-test-post' });
+
+    const mockIndex = [
+      { slug: '2024-01-15-test-post', title: 'Test Post', date: '2024-01-15', path: '/2024/blog.md' }
+    ];
+
+    global.fetch
+      .mockResolvedValueOnce({ ok: true, json: async () => mockIndex })
+      .mockResolvedValueOnce({ ok: true, text: async () => '# Test' });
+
+    renderWithProviders(<BlogPost />);
+
+    await waitFor(() => {
+      const backLinks = screen.getAllByText('← Back to Blog List');
+      expect(backLinks).toHaveLength(2); // One at top, one at bottom
+      expect(backLinks[0].closest('a')).toHaveAttribute('href', '/');
+    });
+  });
+
+  test('uses formatBlogTitle as fallback when title missing', async () => {
+    useParams.mockReturnValue({ slug: '2024-01-15-fallback-test' });
+
+    // Post info without title property
+    const mockIndex = [
+      { slug: '2024-01-15-fallback-test', date: '2024-01-15', path: '/2024/blog.md' }
+    ];
+
+    global.fetch
+      .mockResolvedValueOnce({ ok: true, json: async () => mockIndex })
+      .mockResolvedValueOnce({ ok: true, text: async () => '# Content' });
+
+    renderWithProviders(<BlogPost />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Fallback Test')).toBeInTheDocument(); // formatBlogTitle result
+    });
+  });
 });
