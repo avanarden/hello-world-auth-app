@@ -57,9 +57,32 @@ afterEach(() => {
   }
 });
 
-// Placeholder - tests will be added in next tasks
 describe('formatTitle', () => {
-  test('placeholder', () => {
-    expect(true).toBe(true);
+  test('converts simple slug to title case', () => {
+    expect(formatTitle('my-first-post')).toBe('My First Post');
+  });
+
+  test('handles single word', () => {
+    expect(formatTitle('hello')).toBe('Hello');
+  });
+
+  test('handles slug with .md extension', () => {
+    expect(formatTitle('my-post.md')).toBe('My Post');
+  });
+
+  test('handles numbers in slug', () => {
+    expect(formatTitle('top-10-tips')).toBe('Top 10 Tips');
+  });
+
+  test('handles multiple hyphens', () => {
+    expect(formatTitle('a-very-long-post-title')).toBe('A Very Long Post Title');
+  });
+
+  test('handles empty string', () => {
+    expect(formatTitle('')).toBe('');
+  });
+
+  test('handles already capitalized words', () => {
+    expect(formatTitle('react-and-node')).toBe('React And Node');
   });
 });
