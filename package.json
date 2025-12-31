@@ -6,7 +6,11 @@
     "start": "cd frontend && npm start",
     "build": "npm run generate-index && cd frontend && npm run build",
     "install": "cd frontend && npm install",
-    "generate-index": "node scripts/generate-blog-index.js"
+    "generate-index": "node scripts/generate-blog-index.js",
+    "test": "npm run test:frontend && npm run test:scripts",
+    "test:frontend": "cd frontend && npm test -- --watchAll=false",
+    "test:scripts": "cd frontend && npx jest --config ../jest.config.scripts.js --rootDir ..",
+    "test:coverage": "npm run test:frontend && cd frontend && npx jest --config ../jest.config.scripts.js --rootDir .. --coverage"
   },
   "devDependencies": {
     "concurrently": "8.2.2"
