@@ -134,11 +134,21 @@ function generateBlogIndex() {
   console.log(`Output file: ${OUTPUT_FILE}`);
 }
 
-// Run the generator
-try {
-  generateBlogIndex();
-  process.exit(0);
-} catch (error) {
-  console.error(`Fatal error: ${error.message}`);
-  process.exit(1);
+// Export functions for testing
+module.exports = {
+  formatTitle,
+  findYearDirectories,
+  findBlogPosts,
+  generateBlogIndex
+};
+
+// Only run if executed directly (not when required by tests)
+if (require.main === module) {
+  try {
+    generateBlogIndex();
+    process.exit(0);
+  } catch (error) {
+    console.error(`Fatal error: ${error.message}`);
+    process.exit(1);
+  }
 }
