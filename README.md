@@ -66,6 +66,59 @@ From the `frontend/` directory:
 - `npm run build` - Create production build in `frontend/build/`
 - `npm test` - Run tests (if configured)
 
+## Testing
+
+This project uses Jest and React Testing Library for comprehensive test coverage.
+
+### Running Tests
+
+From the root directory:
+
+```bash
+# Run tests in watch mode (recommended during development)
+npm test
+
+# Run all tests once
+cd frontend && npm test -- --watchAll=false
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+### Test Structure
+
+Tests are organized alongside source files in `__tests__/` directories:
+
+```
+frontend/src/
+├── utils/__tests__/blogUtils.test.js
+├── components/__tests__/
+│   ├── BlogList.test.js
+│   ├── BlogPost.test.js
+│   └── NotFound.test.js
+└── __tests__/
+    ├── App.test.js
+    └── integration.test.js
+```
+
+### Coverage Goals
+
+- **Utilities**: 100% coverage (pure functions)
+- **Components**: 80%+ coverage (user interactions)
+- **Integration**: Key user flows covered
+
+### TDD Workflow
+
+For new features, follow Test-Driven Development:
+
+1. Write failing test describing desired behavior
+2. Run test to verify it fails
+3. Implement minimal code to pass test
+4. Run test to verify it passes
+5. Refactor and commit
+
+See `docs/plans/2025-12-30-testing-framework-design.md` for comprehensive testing guidelines.
+
 ## Adding New Blog Posts
 
 The blog uses an automated index generation system that discovers blog posts from markdown files.
