@@ -141,3 +141,75 @@ describe('findYearDirectories', () => {
     expect(result).toEqual(['2023', '2024', '2025']);
   });
 });
+
+describe('findBlogPosts', () => {
+  test('finds correctly named blog posts', () => {
+    testTempDir = createTempDir();
+
+    createBlogPost(testTempDir, '2024', 'blog-2024-01-15-my-first-post.md');
+    createBlogPost(testTempDir, '2024', 'blog-2024-03-20-another-post.md');
+
+    const result = findBlogPosts(testTempDir, '2024');
+
+    expect(result).toHaveLength(2);
+    expect(result[0]).toMatchObject({
+      slug: '2024-01-15-my-first-post',
+      title: 'My First Post',
+      date: '2024-01-15',
+      path: '/2024/blog-2024-01-15-my-first-post.md'
+    });
+    expect(result[1]).toMatchObject({
+      slug: '2024-03-20-another-post',
+      title: 'Another Post',
+      date: '2024-03-20',
+      path: '/2024/blog-2024-03-20-another-post.md'
+    });
+  });
+
+  test('ignores non-blog markdown files', () => {
+    testTempDir = createTempDir();
+    const yearDir = path.join(testTempDir, '2024');
+    fs.mkdirSync(yearDir, { recursive: true });
+
+    // Create valid blog post
+    createBlogPost(testTempDir, '2024', 'blog-2024-01-15-valid.md');
+
+    // Create invalid files that should be ignored
+    fs.writeFileSync(path.join(yearDir, 'README.md'), 'content');
+    fs.writeFileSync(path.join(yearDir, '2024-01-15-missing-blog-prefix.md'), 'content');
+    fs.writeFileSync(path.join(yearDir, 'blog-invalid-date.md'), 'content');
+    fs.writeFileSync(path.join(yearDir, 'notes.txt'), 'content');
+
+    const result = findBlogPosts(testTempDir, '2024');
+
+    expect(result).toHaveLength(1);
+    expect(result[0].slug).toBe('2024-01-15-valid');
+  });
+
+  test('handles empty year directory', () => {
+    testTempDir = createTempDir();
+    fs.mkdirSync(path.join(testTempDir, '2024'));
+
+    const result = findBlogPosts(testTempDir, '2024');
+
+    expect(result).toEqual([]);
+  });
+
+  test('handles non-existent year directory', () => {
+    testTempDir = createTempDir();
+
+    const result = findBlogPosts(testTempDir, '2024');
+
+    expect(result).toEqual([]);
+  });
+
+  test('extracts title correctly from slug', () => {
+    testTempDir = createTempDir();
+
+    createBlogPost(testTempDir, '2024', 'blog-2024-06-10-react-hooks-guide.md');
+
+    const result = findBlogPosts(testTempDir, '2024');
+
+    expect(result[0].title).toBe('React Hooks Guide');
+  });
+});
