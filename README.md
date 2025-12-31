@@ -68,18 +68,21 @@ From the `frontend/` directory:
 
 ## Testing
 
-This project uses Jest and React Testing Library for comprehensive test coverage.
+This project uses Jest and React Testing Library for comprehensive test coverage across both frontend components and build scripts.
 
 ### Running Tests
 
 From the root directory:
 
 ```bash
-# Run tests in watch mode (recommended during development)
+# Run all tests (frontend + scripts)
 npm test
 
-# Run all tests once
-cd frontend && npm test -- --watchAll=false
+# Run only frontend tests
+npm run test:frontend
+
+# Run only scripts tests
+npm run test:scripts
 
 # Run tests with coverage report
 npm run test:coverage
@@ -99,13 +102,30 @@ frontend/src/
 └── __tests__/
     ├── App.test.js
     └── integration.test.js
+
+scripts/
+└── __tests__/
+    └── generate-blog-index.test.js
 ```
 
 ### Coverage Goals
 
-- **Utilities**: 100% coverage (pure functions)
-- **Components**: 80%+ coverage (user interactions)
-- **Integration**: Key user flows covered
+- **Utilities & Pure Functions**: 100% coverage
+- **Frontend Components**: 80%+ coverage (user interactions)
+- **Build Scripts**: 90%+ coverage (I/O operations)
+- **Integration Tests**: Key user flows covered
+
+### Test Types
+
+**Frontend Tests:**
+- Component unit tests (React Testing Library)
+- Integration tests (user flows)
+- Utility function tests
+
+**Build Script Tests:**
+- Unit tests for pure functions (formatTitle)
+- Integration tests with real filesystem operations
+- Temporary directories for test isolation
 
 ### TDD Workflow
 
