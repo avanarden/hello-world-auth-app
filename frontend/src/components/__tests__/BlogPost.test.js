@@ -90,4 +90,63 @@ describe('BlogPost', () => {
       expect(screen.getByText('January 15, 2024')).toBeInTheDocument();
     });
   });
+
+  test('shows error when post not found in index', async () => {
+    useParams.mockReturnValue({ slug: 'non-existent-post' });
+
+    const mockIndex = [
+      { slug: '2024-01-15-different-post', title: 'Different Post', date: '2024-01-15', path: '/2024/blog.md' }
+    ];
+
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockIndex
+    });
+
+    renderWithProviders(<BlogPost />);
+
+    await waitFor(() => {
+      expect(screen.getByText(/doesn't exist/)).toBeInTheDocument();
+      expect(screen.getByText('Error Loading Post')).toBeInTheDocument();
+    });
+  });
+
+  test('shows error when blog index fails to load', async () => {
+    useParams.mockReturnValue({ slug: '2024-01-15-test-post' });
+
+    global.fetch.mockResolvedValueOnce({
+      ok: false,
+      status: 500
+    });
+
+    renderWithProviders(<BlogPost />);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Unable to load blog index/)).toBeInTheDocument();
+    });
+  });
+
+  test('shows error when markdown file not found (404)', async () => {
+    useParams.mockReturnValue({ slug: '2024-01-15-test-post' });
+
+    const mockIndex = [
+      { slug: '2024-01-15-test-post', title: 'Test Post', date: '2024-01-15', path: '/2024/missing.md' }
+    ];
+
+    global.fetch
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => mockIndex
+      })
+      .mockResolvedValueOnce({
+        ok: false,
+        status: 404
+      });
+
+    renderWithProviders(<BlogPost />);
+
+    await waitFor(() => {
+      expect(screen.getByText(/could not be found/)).toBeInTheDocument();
+    });
+  });
 });
