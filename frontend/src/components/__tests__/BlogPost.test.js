@@ -58,4 +58,36 @@ describe('BlogPost', () => {
     renderWithProviders(<BlogPost />);
     expect(screen.getByText('Loading blog post...')).toBeInTheDocument();
   });
+
+  test('renders blog post with markdown content', async () => {
+    useParams.mockReturnValue({ slug: '2024-01-15-test-post' });
+
+    const mockIndex = [
+      {
+        slug: '2024-01-15-test-post',
+        title: 'Test Post',
+        date: '2024-01-15',
+        path: '/2024/blog-2024-01-15-test-post.md'
+      }
+    ];
+
+    const mockMarkdown = '# Hello World\n\nThis is a test post.';
+
+    global.fetch
+      .mockResolvedValueOnce({ // First call: blog index
+        ok: true,
+        json: async () => mockIndex
+      })
+      .mockResolvedValueOnce({ // Second call: markdown file
+        ok: true,
+        text: async () => mockMarkdown
+      });
+
+    renderWithProviders(<BlogPost />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Test Post')).toBeInTheDocument();
+      expect(screen.getByText('January 15, 2024')).toBeInTheDocument();
+    });
+  });
 });
