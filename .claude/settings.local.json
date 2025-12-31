@@ -32,7 +32,11 @@
       "Skill(superpowers:using-git-worktrees)",
       "Bash(git check-ignore:*)",
       "Bash(git worktree add:*)",
-      "Skill(superpowers:writing-plans)"
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:subagent-driven-development)",
+      "Bash(npm test:*)",
+      "Bash(CI=true npm test -- BlogPost.test.js --watchAll=false)",
+      "Bash(npm run test:coverage:*)"
     ],
     "deny": [],
     "ask": []
