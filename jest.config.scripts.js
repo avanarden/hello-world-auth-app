@@ -1,5 +1,9 @@
 module.exports = {
   testEnvironment: 'node',
   testMatch: ['**/scripts/**/__tests__/**/*.js'],
-  collectCoverageFrom: ['scripts/**/*.js', '!scripts/__tests__/**'],
+  collectCoverageFrom: [
+    '**/scripts/**/*.js',
+    '!**/scripts/__tests__/**',
+    '!**/node_modules/**'
+  ],
 };
