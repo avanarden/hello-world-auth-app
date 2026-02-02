@@ -103,6 +103,83 @@ describe('BlogList', () => {
     });
   });
 
+  test('displays summary text below title and date', async () => {
+    const mockPosts = [
+      { slug: '2024-01-15-post', title: 'Post With Summary', date: '2024-01-15', path: '/2024/blog-2024-01-15-post.md', summary: 'This is a test summary of the blog post.' }
+    ];
+
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockPosts
+    });
+
+    renderWithProviders(<BlogList />);
+
+    await waitFor(() => {
+      expect(screen.getByText('This is a test summary of the blog post.')).toBeInTheDocument();
+    });
+  });
+
+  test('renders summary as plain text (no HTML)', async () => {
+    const mockPosts = [
+      { slug: '2024-01-15-post', title: 'Post', date: '2024-01-15', path: '/2024/blog-2024-01-15-post.md', summary: 'Plain text summary here' }
+    ];
+
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockPosts
+    });
+
+    renderWithProviders(<BlogList />);
+
+    await waitFor(() => {
+      const summaryEl = screen.getByText('Plain text summary here');
+      expect(summaryEl.tagName).toBe('P');
+      expect(summaryEl).toHaveClass('blog-list-summary');
+    });
+  });
+
+  test('does not render summary element when summary is empty', async () => {
+    const mockPosts = [
+      { slug: '2024-01-15-no-summary', title: 'No Summary Post', date: '2024-01-15', path: '/2024/blog-2024-01-15-no-summary.md', summary: '' }
+    ];
+
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockPosts
+    });
+
+    renderWithProviders(<BlogList />);
+
+    await waitFor(() => {
+      expect(screen.getByText('No Summary Post')).toBeInTheDocument();
+    });
+
+    // Summary paragraph should not be rendered
+    const summaryElements = document.querySelectorAll('.blog-list-summary');
+    expect(summaryElements).toHaveLength(0);
+  });
+
+  test('does not render summary element when summary field is missing', async () => {
+    const mockPosts = [
+      { slug: '2024-01-15-old', title: 'Old Post', date: '2024-01-15', path: '/2024/blog-2024-01-15-old.md' }
+    ];
+
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockPosts
+    });
+
+    renderWithProviders(<BlogList />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Old Post')).toBeInTheDocument();
+    });
+
+    const summaryElements = document.querySelectorAll('.blog-list-summary');
+    expect(summaryElements).toHaveLength(0);
+  });
+
   test('renders correct links for each post', async () => {
     const mockPosts = [
       { slug: '2024-01-15-test', title: 'Test Post', date: '2024-01-15', path: '/2024/blog-2024-01-15-test.md' }

@@ -71,6 +71,9 @@ function BlogList() {
             <Link to={`/blog/${post.slug}`} className="blog-list-link">
               <h3 className="blog-list-title">{post.title}</h3>
               <time className="blog-list-date">{formatDate(post.date)}</time>
+              {post.summary && (
+                <p className="blog-list-summary">{post.summary}</p>
+              )}
             </Link>
           </li>
         ))}

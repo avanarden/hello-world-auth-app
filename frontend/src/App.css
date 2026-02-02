@@ -127,6 +127,13 @@ body {
   font-style: italic;
 }
 
+.blog-list-summary {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+  margin: 0.4rem 0 0;
+}
+
 /* Blog List Loading & Error States */
 .blog-list-loading,
 .blog-list-error {
@@ -150,6 +157,10 @@ body {
   }
 
   .blog-list-date {
+    font-size: 0.85rem;
+  }
+
+  .blog-list-summary {
     font-size: 0.85rem;
   }
 }
