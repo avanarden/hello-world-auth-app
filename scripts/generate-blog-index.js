@@ -18,6 +18,7 @@ const PUBLIC_DIR = path.join(__dirname, '../frontend/public');
 const OUTPUT_FILE = path.join(PUBLIC_DIR, 'blog-index.json');
 const YEAR_PATTERN = /^\d{4}$/;
 const BLOG_FILE_PATTERN = /^blog-(\d{4}-\d{2}-\d{2})-(.*\.md)$/;
+const SUMMARY_LENGTH = 150;
 
 /**
  * Formats a slug into a display title
@@ -31,6 +32,70 @@ function formatTitle(slug) {
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+}
+
+/**
+ * Strips markdown syntax from text to produce plain text
+ */
+function stripMarkdown(markdown) {
+  return markdown
+    // Remove code blocks (fenced)
+    .replace(/```[\s\S]*?```/g, '')
+    // Remove inline code
+    .replace(/`([^`]+)`/g, '$1')
+    // Remove images
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
+    // Remove links, keep text
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    // Remove headings markers
+    .replace(/^#{1,6}\s+/gm, '')
+    // Remove bold/italic
+    .replace(/\*{1,3}([^*]+)\*{1,3}/g, '$1')
+    // Remove strikethrough
+    .replace(/~~([^~]+)~~/g, '$1')
+    // Remove blockquotes
+    .replace(/^\s*>\s?/gm, '')
+    // Remove horizontal rules
+    .replace(/^[-*_]{3,}\s*$/gm, '')
+    // Remove table formatting
+    .replace(/\|/g, ' ')
+    .replace(/^[-:\s|]+$/gm, '')
+    // Remove task list markers
+    .replace(/- \[[ x]\]\s*/g, '')
+    // Remove unordered list markers
+    .replace(/^\s*[-*+]\s+/gm, '')
+    // Remove ordered list markers
+    .replace(/^\s*\d+\.\s+/gm, '')
+    // Collapse multiple spaces
+    .replace(/[ \t]+/g, ' ')
+    // Collapse multiple newlines
+    .replace(/\n{2,}/g, ' ')
+    // Replace remaining newlines with spaces
+    .replace(/\n/g, ' ')
+    .trim();
+}
+
+/**
+ * Extracts a summary from plain text, truncating at a word boundary
+ */
+function extractSummary(text, maxLength) {
+  if (!text || text.length === 0) {
+    return '';
+  }
+
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  // Truncate at maxLength, then find the last space to get a word boundary
+  const truncated = text.slice(0, maxLength);
+  const lastSpace = truncated.lastIndexOf(' ');
+
+  if (lastSpace === -1) {
+    return truncated + '...';
+  }
+
+  return truncated.slice(0, lastSpace) + '...';
 }
 
 /**
@@ -71,11 +136,23 @@ function findBlogPosts(publicDir, year) {
         const title = formatTitle(slug);
         const fullSlug = `${date}-${slug}`;
 
+        // Read file content and generate summary
+        let summary = '';
+        try {
+          const filePath = path.join(publicDir, year, file);
+          const content = fs.readFileSync(filePath, 'utf-8');
+          const plainText = stripMarkdown(content);
+          summary = extractSummary(plainText, SUMMARY_LENGTH);
+        } catch (err) {
+          console.warn(`Warning: Could not read ${file} for summary: ${err.message}`);
+        }
+
         posts.push({
           slug: fullSlug,
           title: title,
           date: date,
-          path: `/${year}/${file}`
+          path: `/${year}/${file}`,
+          summary: summary
         });
       }
     }
@@ -137,6 +214,8 @@ function generateBlogIndex() {
 // Export functions for testing
 module.exports = {
   formatTitle,
+  stripMarkdown,
+  extractSummary,
   findYearDirectories,
   findBlogPosts,
   generateBlogIndex
