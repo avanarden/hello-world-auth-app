@@ -1,0 +1,56 @@
+{
+  "project": "basic-app",
+  "branchName": "ralph/blog-post-summaries",
+  "description": "Blog Post Summaries on Main Page - Auto-extract plain-text summaries from blog post content at build time and display them on the main listing page",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Generate summaries at build time",
+      "description": "As a developer, I want the build script to extract a plain-text summary from each blog post so that summary data is available in blog-index.json without runtime fetching.",
+      "acceptanceCriteria": [
+        "generate-blog-index.js reads each markdown file's content",
+        "Strips all markdown syntax (headings, links, bold, code, images, etc.) to produce plain text",
+        "Extracts the first ~150 characters, truncating at a word boundary",
+        "Appends an ellipsis ('...') when the text is truncated",
+        "Adds a summary field to each entry in blog-index.json",
+        "Existing fields (slug, title, date, path) remain unchanged",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Display summary on blog listing page",
+      "description": "As a visitor, I want to see a short summary under each blog post title so I can decide which posts to read.",
+      "acceptanceCriteria": [
+        "Each post in the blog list shows the summary text below the title and date",
+        "Summary is rendered as plain text (no markdown/HTML)",
+        "Summary is visually styled to be secondary to the title (smaller or lighter text)",
+        "Layout remains clean and readable on mobile and desktop",
+        "Gracefully handles posts with no summary (empty content) — shows title/date only",
+        "Typecheck passes",
+        "Verify summaries are visible in browser using agent-browser skill"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "Update tests for summary functionality",
+      "description": "As a developer, I want tests updated to cover the new summary functionality so regressions are caught.",
+      "acceptanceCriteria": [
+        "generate-blog-index.js tests verify summary extraction and truncation",
+        "generate-blog-index.js tests verify markdown stripping",
+        "BlogList component tests verify summary rendering",
+        "All existing tests continue to pass",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": ""
+    }
+  ]
+}
