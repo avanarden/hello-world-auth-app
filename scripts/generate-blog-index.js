@@ -14,7 +14,6 @@ const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const CONTENT_DIR = path.join(__dirname, '../content/posts');
 const PUBLIC_DIR = path.join(__dirname, '../frontend/public');
 const OUTPUT_FILE = path.join(PUBLIC_DIR, 'blog-index.json');
 const YEAR_PATTERN = /^\d{4}$/;
@@ -108,43 +107,6 @@ function extractSummary(text, maxLength) {
 }
 
 /**
- * Copies blog post files from content/posts/ to frontend/public/
- * preserving the year directory structure
- */
-function copyPostsToPublic(contentDir, publicDir) {
-  if (!fs.existsSync(contentDir)) {
-    console.warn(`Warning: Content directory not found: ${contentDir}`);
-    return;
-  }
-
-  const entries = fs.readdirSync(contentDir, { withFileTypes: true });
-  const yearDirs = entries
-    .filter(entry => entry.isDirectory())
-    .filter(entry => YEAR_PATTERN.test(entry.name));
-
-  for (const yearDir of yearDirs) {
-    const srcYear = path.join(contentDir, yearDir.name);
-    const destYear = path.join(publicDir, yearDir.name);
-
-    if (!fs.existsSync(destYear)) {
-      fs.mkdirSync(destYear, { recursive: true });
-    }
-
-    const files = fs.readdirSync(srcYear);
-    for (const file of files) {
-      if (file.match(BLOG_FILE_PATTERN)) {
-        fs.copyFileSync(
-          path.join(srcYear, file),
-          path.join(destYear, file)
-        );
-      }
-    }
-  }
-
-  console.log(`Copied posts from ${contentDir} to ${publicDir}`);
-}
-
-/**
  * Scans a directory and returns all subdirectories matching the year pattern
  */
 function findYearDirectories(publicDir) {
@@ -215,9 +177,6 @@ function findBlogPosts(publicDir, year) {
 function generateBlogIndex() {
   console.log('Generating blog index...');
 
-  // Copy posts from source-controlled content directory to public
-  copyPostsToPublic(CONTENT_DIR, PUBLIC_DIR);
-
   console.log(`Scanning directory: ${PUBLIC_DIR}`);
 
   // Find all year directories
@@ -266,7 +225,6 @@ module.exports = {
   formatTitle,
   stripMarkdown,
   extractSummary,
-  copyPostsToPublic,
   findYearDirectories,
   findBlogPosts,
   generateBlogIndex

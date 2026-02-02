@@ -91,4 +91,4 @@ Several tools and frameworks exist to integrate LLM evaluation into development 
 
 ---
 
-This post is based on a talk I gave in [Latent Space](https://docs.google.com/presentation/d/14EE2j6ii4PEA0Y-wUg80weC3eJ-qx2q41uUAEqytG28) in April 2024.
+This post is based on a talk I gave at [Latent Space](https://docs.google.com/presentation/d/14EE2j6ii4PEA0Y-wUg80weC3eJ-qx2q41uUAEqytG28) in April 2024.

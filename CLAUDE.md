@@ -35,12 +35,12 @@ npx jest --config jest.config.scripts.js generate-blog-index.test.js
 
 This is a **static blog site** built with React (CRA), designed for deployment to Amazon S3.
 
-**Content pipeline**: Markdown files in `content/posts/YYYY/` → build script copies to `frontend/public/YYYY/` and generates `frontend/public/blog-index.json` → React app fetches index and renders posts client-side.
+**Content pipeline**: Markdown files in `frontend/public/YYYY/` → build script generates `frontend/public/blog-index.json` → React app fetches index and renders posts client-side.
 
 **Blog post naming**: `blog-YYYY-MM-DD-slug.md` (e.g., `blog-2024-12-01-hello-world.md`)
 
 **Key directories**:
-- `content/posts/` — Source-controlled blog post markdown files
+- `frontend/public/YYYY/` — Blog post markdown files organized by year
 - `scripts/generate-blog-index.js` — Build-time script that discovers posts, extracts metadata/summaries, generates index JSON
 - `frontend/src/components/` — React components (BlogList, BlogPost, NotFound)
 - `frontend/src/utils/blogUtils.js` — Formatting helpers (formatTitle, formatDate, sortByDateDesc)
