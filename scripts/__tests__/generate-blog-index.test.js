@@ -3,6 +3,8 @@ const path = require('path');
 const os = require('os');
 const {
   formatTitle,
+  stripMarkdown,
+  extractSummary,
   findYearDirectories,
   findBlogPosts,
   generateBlogIndex
@@ -25,7 +27,7 @@ function createTempDir() {
  * @param {string} year - Year subdirectory
  * @param {string} filename - Full filename (e.g., 'blog-2024-01-15-my-post.md')
  */
-function createBlogPost(baseDir, year, filename) {
+function createBlogPost(baseDir, year, filename, content) {
   const yearDir = path.join(baseDir, year);
 
   // Create year directory if it doesn't exist
@@ -33,9 +35,9 @@ function createBlogPost(baseDir, year, filename) {
     fs.mkdirSync(yearDir, { recursive: true });
   }
 
-  // Create the blog post file with dummy content
+  // Create the blog post file with provided or dummy content
   const filePath = path.join(yearDir, filename);
-  fs.writeFileSync(filePath, '# Test Blog Post\n\nContent here.');
+  fs.writeFileSync(filePath, content !== undefined ? content : '# Test Blog Post\n\nContent here.');
 
   return filePath;
 }
@@ -84,6 +86,102 @@ describe('formatTitle', () => {
 
   test('handles already capitalized words', () => {
     expect(formatTitle('react-and-node')).toBe('React And Node');
+  });
+});
+
+describe('stripMarkdown', () => {
+  test('removes heading markers', () => {
+    expect(stripMarkdown('# Heading 1\n## Heading 2')).toBe('Heading 1 Heading 2');
+  });
+
+  test('removes bold and italic markers', () => {
+    expect(stripMarkdown('**bold** and *italic* and ***both***')).toBe('bold and italic and both');
+  });
+
+  test('removes links but keeps text', () => {
+    expect(stripMarkdown('[click here](https://example.com)')).toBe('click here');
+  });
+
+  test('removes images', () => {
+    expect(stripMarkdown('![alt text](image.png)')).toBe('alt text');
+  });
+
+  test('removes fenced code blocks', () => {
+    expect(stripMarkdown('before\n```js\nconst x = 1;\n```\nafter')).toBe('before after');
+  });
+
+  test('removes inline code but keeps content', () => {
+    expect(stripMarkdown('use `console.log` to debug')).toBe('use console.log to debug');
+  });
+
+  test('removes blockquotes', () => {
+    expect(stripMarkdown('> This is a quote')).toBe('This is a quote');
+  });
+
+  test('removes unordered list markers', () => {
+    expect(stripMarkdown('- item one\n- item two')).toBe('item one item two');
+  });
+
+  test('removes ordered list markers', () => {
+    expect(stripMarkdown('1. first\n2. second')).toBe('first second');
+  });
+
+  test('removes strikethrough', () => {
+    expect(stripMarkdown('~~deleted~~ text')).toBe('deleted text');
+  });
+
+  test('collapses multiple spaces and newlines', () => {
+    expect(stripMarkdown('word1   word2\n\n\nword3')).toBe('word1 word2 word3');
+  });
+
+  test('handles empty string', () => {
+    expect(stripMarkdown('')).toBe('');
+  });
+
+  test('handles complex markdown with mixed syntax', () => {
+    const md = '# Title\n\nSome **bold** text with a [link](url) and `code`.';
+    const result = stripMarkdown(md);
+    expect(result).toBe('Title Some bold text with a link and code.');
+  });
+});
+
+describe('extractSummary', () => {
+  test('returns full text when shorter than max length', () => {
+    expect(extractSummary('Short text', 150)).toBe('Short text');
+  });
+
+  test('returns empty string for empty input', () => {
+    expect(extractSummary('', 150)).toBe('');
+  });
+
+  test('returns empty string for null input', () => {
+    expect(extractSummary(null, 150)).toBe('');
+  });
+
+  test('truncates at word boundary with ellipsis', () => {
+    const text = 'The quick brown fox jumps over the lazy dog and then runs away';
+    const result = extractSummary(text, 30);
+    expect(result).toBe('The quick brown fox jumps...');
+    expect(result.length).toBeLessThanOrEqual(33); // 30 + '...'
+  });
+
+  test('appends ellipsis when truncated', () => {
+    const text = 'a '.repeat(100).trim();
+    const result = extractSummary(text, 20);
+    expect(result.endsWith('...')).toBe(true);
+  });
+
+  test('does not append ellipsis when text fits exactly', () => {
+    const text = 'Exact fit here';
+    const result = extractSummary(text, 14);
+    expect(result).toBe('Exact fit here');
+    expect(result.endsWith('...')).toBe(false);
+  });
+
+  test('handles single long word with no spaces', () => {
+    const text = 'a'.repeat(200);
+    const result = extractSummary(text, 150);
+    expect(result).toBe('a'.repeat(150) + '...');
   });
 });
 
@@ -211,6 +309,41 @@ describe('findBlogPosts', () => {
     const result = findBlogPosts(testTempDir, '2024');
 
     expect(result[0].title).toBe('React Hooks Guide');
+  });
+
+  test('includes summary field extracted from markdown content', () => {
+    testTempDir = createTempDir();
+
+    const content = '# My Post\n\nThis is the body of the blog post with some content.';
+    createBlogPost(testTempDir, '2024', 'blog-2024-01-15-my-post.md', content);
+
+    const result = findBlogPosts(testTempDir, '2024');
+
+    expect(result[0]).toHaveProperty('summary');
+    expect(result[0].summary).toBe('My Post This is the body of the blog post with some content.');
+  });
+
+  test('truncates summary at word boundary for long content', () => {
+    testTempDir = createTempDir();
+
+    const longContent = '# Title\n\n' + 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '.repeat(10);
+    createBlogPost(testTempDir, '2024', 'blog-2024-01-15-long-post.md', longContent);
+
+    const result = findBlogPosts(testTempDir, '2024');
+
+    expect(result[0].summary.endsWith('...')).toBe(true);
+    // Summary without ellipsis should be <= 150 chars
+    expect(result[0].summary.length).toBeLessThanOrEqual(153);
+  });
+
+  test('returns empty summary for empty content file', () => {
+    testTempDir = createTempDir();
+
+    createBlogPost(testTempDir, '2024', 'blog-2024-01-15-empty.md', '');
+
+    const result = findBlogPosts(testTempDir, '2024');
+
+    expect(result[0].summary).toBe('');
   });
 });
 
