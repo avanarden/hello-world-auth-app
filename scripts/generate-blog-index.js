@@ -29,9 +29,17 @@ function formatTitle(slug) {
   // Remove .md extension if present
   const cleanSlug = slug.replace(/\.md$/, '');
 
+  // Words that should be fully uppercased (acronyms)
+  const acronyms = ['llm', 'api', 'ci', 'cd', 'aws', 'rag', 'bff', 'css', 'html', 'js'];
+
   return cleanSlug
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(word => {
+      if (acronyms.includes(word.toLowerCase())) {
+        return word.toUpperCase();
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
     .join(' ');
 }
 
